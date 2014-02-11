@@ -1,0 +1,13 @@
+Package: RMassBankDataIPBMM48
+Type: Package
+Title: Test dataset for RMassBank
+Version: 1.0.0
+Author: Christoph Böttcher, Steffen Neumann
+Maintainer: Steffen Neumann <sneumann@ipb-halle.de>
+Description: Example spectra, example compound list(s) and an example annotation
+    list for an Arabidopsis Leaf extract dataset; used to test RMassBank. 
+biocViews: ExperimentData, MassSpectrometryData
+License: Artistic-2.0
+Suggests: RMassBank
+Packaged: 2014-02-11 10:09:34 UTC
+Encoding: UTF-8

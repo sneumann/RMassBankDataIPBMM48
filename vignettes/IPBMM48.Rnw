@@ -1,0 +1,54 @@
+% \VignetteIndexEntry{RMassBank spectral extraction for IPB MM48 data set }
+% \VignettePackage{rcdk}
+% \VignetteKeywords{}
+%% To generate the Latex code
+
+% library(RMassBank)
+% Rnwfile<- file.path("IPBMM48.Rnw")
+% Sweave(Rnwfile,pdf=TRUE,eps=TRUE,stylepath=TRUE,driver=RweaveLatex())
+
+
+\documentclass[letterpaper, 11pt]{article}
+
+\usepackage{times}
+\usepackage{url}
+\usepackage[pdftex,bookmarks=true]{hyperref}
+
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\funcarg}[1]{{\texttt{#1}}}
+
+\newcommand{\Rvar}[1]{{\texttt{#1}}}
+
+\newcommand{\rclass}[1]{{\textit{#1}}}
+
+<<echo=TRUE>>=
+
+library(RMassBank)
+datadir <- system.file("mzdata", package="RMassBankDataIPBMM48")
+
+loadRmbSettings(system.file("IPBMM48.ini", package="RMassBankDataIPBMM48"))
+loadList(system.file("compoundlist/IPBMM48.csv", package="RMassBankDataIPBMM48"))
+
+msmsXCMS <- newMsmsWorkspace()
+msmsXCMS@files <- list.files(datadir, pattern=".mz[dD]ata", full.names=TRUE)
+Args <- list(method="centWave", ppm = 25, snthresh = 1.5,
+                  peakwidth = c(5,12), integrate = 1, mzdiff = -0.001, mzCenterFun = "meanApex3")
+
+msmsXCMS <- msmsWorkflow(msmsXCMS,steps=1:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
+                         archivename="archives", progressbar=function(object = NULL, value = 0, min = 0,
+                                                                      max = 100, close = FALSE){})
+
+mbXCMS <- newMbWorkspace(msmsXCMS)
+mbXCMS <- resetInfolists(mbXCMS)
+mbXCMS <- loadInfolists(mbXCMS, system.file("infolist", package="RMassBankDataIPBMM48"))
+mbXCMS <- mbWorkflow(mbXCMS)
+
+show(mbXCMS)
+@ 
+
+And this was the environment to build the vignette
+<<>>=
+@ 
+sessionInfo()
+@ 

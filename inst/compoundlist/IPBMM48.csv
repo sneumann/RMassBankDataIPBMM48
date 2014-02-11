@@ -1,0 +1,9 @@
+ID,Name_deu,Name_Eng,Name,SMILES,RT,CAS
+9665,Xanthohumol ,Xanthohumol ,Xanthohumol ,CC(=CCc1c(cc(c(C(=O)/C=C/c2ccc(cc2)O)c1O)OC)O)C,10.8211133333,
+4114,Xanthotoxin ,Xanthotoxin ,Xanthotoxin ,COc1c2c(cco2)cc2ccc(=O)oc12,7.0591765385,
+6758,Rotenone ,Rotenone ,Rotenone ,C=C(C)[C@H]1Cc2c(ccc3C(=O)[C@H]4c5cc(c(cc5OC[C@H]4Oc23)OC)OC)O1,10.4172038462,
+9867,Indole-3-carboxylic acid ,Indole-3-carboxylic acid ,Indole-3-carboxylic acid ,c1ccc2c(c1)c(c[nH]2)C(=O)O,4.83364,
+0219,Emetine ,Emetine ,Emetine ,CC[C@H]1CN2CCc3cc(c(cc3[C@@H]2C[C@@H]1C[C@@H]1c2cc(c(cc2CCN1)OC)OC)OC)OC,3.965075,
+1795,Indole-3-acetonitrile ,Indole-3-acetonitrile ,Indole-3-acetonitrile ,c1ccc2c(c1)c(CC#N)c[nH]2,6.548642,
+0237,Bicuculline ,Bicuculline ,Bicuculline ,CN1CCc2cc3c(cc2[C@H]1[C@H]1c2ccc4c(c2C(=O)O1)OCO4)OCO3,8,
+5770,Reserpine ,Reserpine ,Reserpine ,COc1ccc2c3CCN4C[C@H]5C[C@H]([C@@H]([C@H]([C@H]5C[C@@H]4c3[nH]c2c1)C(=O)OC)OC)OC(=O)c1cc(c(c(c1)OC)OC)OC,8.6,
