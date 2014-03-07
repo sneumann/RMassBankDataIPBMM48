@@ -25,19 +25,26 @@
 <<echo=TRUE>>=
 
 library(RMassBank)
-datadir <- system.file("mzdata", package="RMassBankDataIPBMM48")
+datadir <- system.file(package="RMassBankDataIPBMM48")
+oldpath <- getwd()
+setwd(datadir)
 
 loadRmbSettings(system.file("IPBMM48.ini", package="RMassBankDataIPBMM48"))
 loadList(system.file("compoundlist/IPBMM48.csv", package="RMassBankDataIPBMM48"))
 
+
 msmsXCMS <- newMsmsWorkspace()
-msmsXCMS@files <- list.files(datadir, pattern=".mz[dD]ata", full.names=TRUE)
 Args <- list(method="centWave", ppm = 25, snthresh = 1.5,
                   peakwidth = c(5,12), integrate = 1, mzdiff = -0.001, mzCenterFun = "meanApex3")
-
-msmsXCMS <- msmsWorkflow(msmsXCMS,steps=1:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
-                         archivename="archives", progressbar=function(object = NULL, value = 0, min = 0,
-                                                                      max = 100, close = FALSE){})
+ftable <- paste(datadir,"/filetable/filetable.csv",sep="")
+				  
+msmsXCMS <- msmsRead(msmsXCMS, filetable = ftable,
+					readMethod = "xcms", mode = "pH", confirmMode = FALSE, useRtLimit = TRUE, 
+					Args = Args, settings = getOption("RMassBank"), progressbar = "progressBarHook", MSe = FALSE)
+setwd(oldpath)
+msmsWorkflow(msmsXCMS,steps=2:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
+				archivename="archives", progressbar=function(object = NULL, value = 0, min = 0,
+				max = 100, close = FALSE){})
 
 mbXCMS <- newMbWorkspace(msmsXCMS)
 mbXCMS <- resetInfolists(mbXCMS)
