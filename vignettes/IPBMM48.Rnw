@@ -42,7 +42,7 @@ msmsXCMS <- msmsRead(msmsXCMS, filetable = ftable,
 					readMethod = "xcms", mode = "pH", confirmMode = FALSE, useRtLimit = TRUE, 
 					Args = Args, settings = getOption("RMassBank"), progressbar = "progressBarHook", MSe = FALSE)
 setwd(oldpath)
-msmsWorkflow(msmsXCMS,steps=2:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
+msmsXCMS <- msmsWorkflow(msmsXCMS,steps=2:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
 				archivename="archives", progressbar=function(object = NULL, value = 0, min = 0,
 				max = 100, close = FALSE){})
 
