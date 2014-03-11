@@ -7,7 +7,6 @@
 % Rnwfile<- file.path("IPBMM48.Rnw")
 % Sweave(Rnwfile,pdf=TRUE,eps=TRUE,stylepath=TRUE,driver=RweaveLatex())
 
-
 \documentclass[letterpaper, 11pt]{article}
 
 \usepackage{times}
@@ -21,6 +20,9 @@
 \newcommand{\Rvar}[1]{{\texttt{#1}}}
 
 \newcommand{\rclass}[1]{{\textit{#1}}}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
 
 <<echo=TRUE>>=
 
@@ -55,7 +57,9 @@ show(mbXCMS)
 @ 
 
 And this was the environment to build the vignette
+
 <<>>=
-@ 
 sessionInfo()
 @ 
+
+\end{document}
