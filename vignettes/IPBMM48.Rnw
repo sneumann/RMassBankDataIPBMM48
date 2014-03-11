@@ -26,31 +26,40 @@
 
 <<echo=TRUE>>=
 
-library(RMassBank)
+  library(RMassBank)
 datadir <- system.file(package="RMassBankDataIPBMM48")
 oldpath <- getwd()
 setwd(datadir)
 
-loadRmbSettings(system.file("IPBMM48.ini", package="RMassBankDataIPBMM48"))
-loadList(system.file("compoundlist/IPBMM48.csv", package="RMassBankDataIPBMM48"))
-
+loadRmbSettings(system.file("IPBMM48.ini", 
+                            package="RMassBankDataIPBMM48"))
+loadList(system.file("compoundlist/IPBMM48.csv", 
+                     package="RMassBankDataIPBMM48"))
 
 msmsXCMS <- newMsmsWorkspace()
 Args <- list(method="centWave", ppm = 25, snthresh = 1.5,
-                  peakwidth = c(5,12), integrate = 1, mzdiff = -0.001, mzCenterFun = "meanApex3")
+             peakwidth = c(5,12), integrate = 1, mzdiff = -0.001, 
+             mzCenterFun = "meanApex3")
 ftable <- paste(datadir,"/filetable/filetable.csv",sep="")
-				  
+
 msmsXCMS <- msmsRead(msmsXCMS, filetable = ftable,
-					readMethod = "xcms", mode = "pH", confirmMode = FALSE, useRtLimit = TRUE, 
-					Args = Args, settings = getOption("RMassBank"), progressbar = "progressBarHook", MSe = FALSE)
+                     readMethod = "xcms", mode = "pH", 
+                     confirmMode = FALSE, useRtLimit = TRUE, 
+                     Args = Args, settings = getOption("RMassBank"), 
+                     progressbar = "progressBarHook", MSe = FALSE)
 setwd(oldpath)
-msmsXCMS <- msmsWorkflow(msmsXCMS,steps=2:8, mode="pH", readMethod="xcms", findPeaksArgs = Args,
-				archivename="archives", progressbar=function(object = NULL, value = 0, min = 0,
-				max = 100, close = FALSE){})
+
+msmsXCMS <- msmsWorkflow(msmsXCMS,steps=2:8, mode="pH", 
+                         readMethod="xcms", findPeaksArgs = Args,
+                         archivename="archives", 
+                         progressbar=function(object = NULL, 
+                           value = 0, min = 0,
+                           max = 100, close = FALSE){})
 
 mbXCMS <- newMbWorkspace(msmsXCMS)
 mbXCMS <- resetInfolists(mbXCMS)
-mbXCMS <- loadInfolists(mbXCMS, system.file("infolist", package="RMassBankDataIPBMM48"))
+mbXCMS <- loadInfolists(mbXCMS, system.file("infolist", 
+                                            package="RMassBankDataIPBMM48"))
 mbXCMS <- mbWorkflow(mbXCMS)
 
 show(mbXCMS)
